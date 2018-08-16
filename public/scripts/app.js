@@ -41,8 +41,7 @@ var IndecisionApp = function (_React$Component) {
         value: function handlePick() {
             var randomNum = Math.floor(Math.random() * this.state.options.length);
             var option = this.state.options[randomNum];
-
-            return option;
+            alert(option);
         }
     }, {
         key: 'render',
@@ -115,11 +114,6 @@ var Action = function (_React$Component3) {
     }
 
     _createClass(Action, [{
-        key: 'handlePick',
-        value: function handlePick() {
-            alert('handlePick');
-        }
-    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
