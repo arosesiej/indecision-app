@@ -11,6 +11,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // React component are just ES6 classes
 // In React Components - you must define render
 
+
+/**
+ * Application that takes user input and randomly chooses one and displays back to the user.
+ */
 var IndecisionApp = function (_React$Component) {
     _inherits(IndecisionApp, _React$Component);
 
@@ -21,6 +25,8 @@ var IndecisionApp = function (_React$Component) {
 
         _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
         _this.handlePick = _this.handlePick.bind(_this);
+        _this.handleAddOption = _this.handleAddOption.bind(_this);
+
         _this.state = {
             options: ['Thing one', 'Thing two', 'Thing 3']
         };
@@ -44,6 +50,11 @@ var IndecisionApp = function (_React$Component) {
             alert(option);
         }
     }, {
+        key: 'handleAddOption',
+        value: function handleAddOption(option) {
+            console.log(option);
+        }
+    }, {
         key: 'render',
         value: function render() {
 
@@ -63,13 +74,20 @@ var IndecisionApp = function (_React$Component) {
                     // allows access to this option via the option class
                     , handleDeleteOptions: this.handleDeleteOptions
                 }),
-                React.createElement(AddOption, null)
+                React.createElement(AddOption, {
+                    handleAddOption: this.handleAddOption
+                })
             );
         }
     }]);
 
     return IndecisionApp;
 }(React.Component);
+
+/**
+ * Contains header component for top of page
+ */
+
 
 var Header = function (_React$Component2) {
     _inherits(Header, _React$Component2);
@@ -104,6 +122,11 @@ var Header = function (_React$Component2) {
     return Header;
 }(React.Component);
 
+/**
+ * Houses button for user to click (and have the program decide for them)
+ */
+
+
 var Action = function (_React$Component3) {
     _inherits(Action, _React$Component3);
 
@@ -133,6 +156,12 @@ var Action = function (_React$Component3) {
 
     return Action;
 }(React.Component);
+
+/**
+ * 
+ * 
+ */
+
 
 var Options = function (_React$Component4) {
     _inherits(Options, _React$Component4);
@@ -164,6 +193,11 @@ var Options = function (_React$Component4) {
     return Options;
 }(React.Component);
 
+/**
+ * Prints option text to the screen
+ */
+
+
 var Option = function (_React$Component5) {
     _inherits(Option, _React$Component5);
 
@@ -187,13 +221,21 @@ var Option = function (_React$Component5) {
     return Option;
 }(React.Component);
 
+/**
+ * Houses necessary functions to add options to our array
+ */
+
+
 var AddOption = function (_React$Component6) {
     _inherits(AddOption, _React$Component6);
 
-    function AddOption() {
+    function AddOption(props) {
         _classCallCheck(this, AddOption);
 
-        return _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).apply(this, arguments));
+        var _this6 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
+
+        _this6.handleAddOption = _this6.handleAddOption.bind(_this6);
+        return _this6;
     }
 
     _createClass(AddOption, [{
@@ -204,7 +246,7 @@ var AddOption = function (_React$Component6) {
             var option = e.target.elements.option.value.trim();
 
             if (option) {
-                alert(option);
+                this.props.handleAddOption(option);
             }
         }
     }, {

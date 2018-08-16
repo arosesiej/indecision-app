@@ -1,12 +1,18 @@
 // React component are just ES6 classes
 // In React Components - you must define render
 
+
+/**
+ * Application that takes user input and randomly chooses one and displays back to the user.
+ */
 class IndecisionApp extends React.Component {
     constructor(props) {
         super(props);
 
         this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
         this.handlePick = this.handlePick.bind(this);
+        this.handleAddOption = this.handleAddOption.bind(this);
+
         this.state = {
             options: ['Thing one', 'Thing two', 'Thing 3']
         }
@@ -28,6 +34,10 @@ class IndecisionApp extends React.Component {
         
     }
 
+    handleAddOption(option) {
+        console.log(option);
+    }
+
     render() {
 
         const title = 'Test App'; 
@@ -46,13 +56,17 @@ class IndecisionApp extends React.Component {
                     // allows access to this option via the option class
                     handleDeleteOptions={this.handleDeleteOptions}
                 />
-                <AddOption />
+                <AddOption 
+                    handleAddOption={this.handleAddOption}
+                />
             </div>
         );
     }
 }
 
-
+/**
+ * Contains header component for top of page
+ */
 class Header extends React.Component {
     render() {
         console.log(this.props);
@@ -65,9 +79,10 @@ class Header extends React.Component {
     }
 }
 
+/**
+ * Houses button for user to click (and have the program decide for them)
+ */
 class Action extends React.Component {
-
-
     render() {
         return (
             <div>
@@ -84,9 +99,11 @@ class Action extends React.Component {
     }
 }
 
+/**
+ * 
+ * 
+ */
 class Options extends React.Component {
-
-
     render() {
         return (
             <div>
@@ -99,6 +116,9 @@ class Options extends React.Component {
     }
 }
 
+/**
+ * Prints option text to the screen
+ */
 class Option extends React.Component {
     render() {
         return (
@@ -109,14 +129,24 @@ class Option extends React.Component {
     }
 }
 
+
+/**
+ * Houses necessary functions to add options to our array
+ */
 class AddOption extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleAddOption = this.handleAddOption.bind(this);
+    }
+
+
     handleAddOption(e) {
         e.preventDefault();
 
         const option = e.target.elements.option.value.trim();
 
         if (option) {
-            alert(option);
+            this.props.handleAddOption(option);
         }
     }
 
