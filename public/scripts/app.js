@@ -28,7 +28,7 @@ var IndecisionApp = function (_React$Component) {
         _this.handleAddOption = _this.handleAddOption.bind(_this);
 
         _this.state = {
-            options: ['Thing one', 'Thing two', 'Thing 3']
+            options: []
         };
         return _this;
     }
@@ -52,7 +52,23 @@ var IndecisionApp = function (_React$Component) {
     }, {
         key: 'handleAddOption',
         value: function handleAddOption(option) {
-            console.log(option);
+
+            // check if empty string
+            if (!option) {
+                return 'Enter valid value to add.';
+
+                // check if value already exists
+            } else if (this.state.options.indexOf(option) > -1) {
+                return 'Value already exists';
+            }
+
+            this.setState(function (prevState) {
+                return {
+
+                    //add options to array
+                    options: prevState.options.concat(option)
+                };
+            });
         }
     }, {
         key: 'render',
@@ -235,34 +251,64 @@ var AddOption = function (_React$Component6) {
         var _this6 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
 
         _this6.handleAddOption = _this6.handleAddOption.bind(_this6);
+
+        // state of input options - user input
+        _this6.state = {
+            error: undefined
+        };
         return _this6;
     }
+
+    // When form submitted
+
 
     _createClass(AddOption, [{
         key: 'handleAddOption',
         value: function handleAddOption(e) {
+            // prevent default form submission
             e.preventDefault();
 
             var option = e.target.elements.option.value.trim();
 
+            // error from user input
+            var error = this.props.handleAddOption(option);
+
+            // if user enteres an error - update the state
+            this.setState(function () {
+                return {
+                    // can use just 'error' since name is same
+                    error: error
+                };
+            });
+
             if (option) {
+                // Manipulates state
                 this.props.handleAddOption(option);
             }
         }
     }, {
         key: 'render',
         value: function render() {
-            return React.createElement(
-                'div',
-                null,
+            return (
+
+                // is there an error currently - display to user
                 React.createElement(
-                    'form',
-                    { onSubmit: this.handleAddOption },
-                    React.createElement('input', { type: 'text', name: 'option' }),
-                    React.createElement(
-                        'button',
+                    'div',
+                    null,
+                    this.state.error && React.createElement(
+                        'p',
                         null,
-                        'Add Option'
+                        this.state.error
+                    ),
+                    React.createElement(
+                        'form',
+                        { onSubmit: this.handleAddOption },
+                        React.createElement('input', { type: 'text', name: 'option' }),
+                        React.createElement(
+                            'button',
+                            null,
+                            'Add Option'
+                        )
                     )
                 )
             );
