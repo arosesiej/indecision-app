@@ -11,6 +11,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // React component are just ES6 classes
 // In React Components - you must define render
 
+// stateless functional component
+// doesn't do much - single funct render - simple
+// presentation-based components
+
 
 /**
  * Application that takes user input and randomly chooses one and displays back to the user.
@@ -33,6 +37,9 @@ var IndecisionApp = function (_React$Component) {
         return _this;
     }
 
+    // delete options - clear array
+
+
     _createClass(IndecisionApp, [{
         key: 'handleDeleteOptions',
         value: function handleDeleteOptions() {
@@ -42,6 +49,9 @@ var IndecisionApp = function (_React$Component) {
                 };
             });
         }
+
+        // pick a random option
+
     }, {
         key: 'handlePick',
         value: function handlePick() {
@@ -49,6 +59,9 @@ var IndecisionApp = function (_React$Component) {
             var option = this.state.options[randomNum];
             alert(option);
         }
+
+        // add an option from user input
+
     }, {
         key: 'handleAddOption',
         value: function handleAddOption(option) {
@@ -62,9 +75,10 @@ var IndecisionApp = function (_React$Component) {
                 return 'Value already exists';
             }
 
+            console.log('this is an option:' + option);
+
             this.setState(function (prevState) {
                 return {
-
                     //add options to array
                     options: prevState.options.concat(option)
                 };
@@ -76,6 +90,8 @@ var IndecisionApp = function (_React$Component) {
 
             var title = 'Test App';
             var subtitle = 'This is a test subtitle.';
+
+            console.log(this.state.options);
 
             return React.createElement(
                 'div',
@@ -281,10 +297,12 @@ var AddOption = function (_React$Component6) {
                 };
             });
 
+            /*
             if (option) {
                 // Manipulates state
                 this.props.handleAddOption(option);
             }
+            */
         }
     }, {
         key: 'render',

@@ -1,6 +1,10 @@
 // React component are just ES6 classes
 // In React Components - you must define render
 
+// stateless functional component
+// doesn't do much - single funct render - simple
+// presentation-based components
+
 
 /**
  * Application that takes user input and randomly chooses one and displays back to the user.
@@ -18,7 +22,7 @@ class IndecisionApp extends React.Component {
         }
     }
 
-
+    // delete options - clear array
     handleDeleteOptions() {
         this.setState(() => {
             return {
@@ -27,6 +31,7 @@ class IndecisionApp extends React.Component {
         });
     }
 
+    // pick a random option
     handlePick() {
         const randomNum = Math.floor(Math.random() * this.state.options.length);
         const option = this.state.options[randomNum];
@@ -34,6 +39,7 @@ class IndecisionApp extends React.Component {
         
     }
 
+    // add an option from user input
     handleAddOption(option) {
 
         // check if empty string
@@ -45,10 +51,10 @@ class IndecisionApp extends React.Component {
             return 'Value already exists';
         }
 
+        console.log('this is an option:' + option);
 
         this.setState((prevState) => {
             return {
-
                 //add options to array
                 options: prevState.options.concat((option))
             };
@@ -60,6 +66,7 @@ class IndecisionApp extends React.Component {
         const title = 'Test App'; 
         const subtitle = 'This is a test subtitle.';
 
+        console.log(this.state.options);
 
         return(
             <div>
@@ -180,10 +187,12 @@ class AddOption extends React.Component {
             };
         });
 
+        /*
         if (option) {
             // Manipulates state
             this.props.handleAddOption(option);
         }
+        */
     }
 
     render() {
@@ -199,9 +208,13 @@ class AddOption extends React.Component {
                     <button>Add Option</button>
                </form>
 
+               
+
             </div>
         );
     }
 }
+
+
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
