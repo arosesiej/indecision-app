@@ -23,6 +23,25 @@ class IndecisionApp extends React.Component {
         }
     }
 
+    //Lifecycle method
+    // fires when component first mounts to DOM
+    componentDidMount() {
+        console.log('componentDidMount!');
+    }
+
+    //Lifecycle method
+    // when state or prop values change
+    componentDidUpdate(prevProps, prevState) {
+
+        console.log('componentDidUpdate!');
+    }
+
+    //Lifecycle method
+    // fires before component goes away
+    componentWillUnmount() {
+        console.log('componentWillUnmount!')
+    }
+
     // delete all options - clear array
     handleDeleteOptions() {
 

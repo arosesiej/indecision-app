@@ -38,10 +38,38 @@ var IndecisionApp = function (_React$Component) {
         return _this;
     }
 
-    // delete all options - clear array
+    //Lifecycle method
+    // fires when component first mounts to DOM
 
 
     _createClass(IndecisionApp, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log('componentDidMount!');
+        }
+
+        //Lifecycle method
+        // when state or prop values change
+
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+
+            console.log('componentDidUpdate!');
+        }
+
+        //Lifecycle method
+        // fires before component goes away
+
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log('componentWillUnmount!');
+        }
+
+        // delete all options - clear array
+
+    }, {
         key: 'handleDeleteOptions',
         value: function handleDeleteOptions() {
 
