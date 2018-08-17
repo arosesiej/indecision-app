@@ -61,7 +61,7 @@ var Counter = function (_React$Component) {
 
         // default state object
         _this.state = {
-            count: 0
+            count: props.count
         };
         return _this;
     }
@@ -139,4 +139,9 @@ var Counter = function (_React$Component) {
     return Counter;
 }(React.Component);
 
+Counter.defaultProps = {
+    count: 0
+};
+
+// could provide a value like "<Counter count={-10}/>"
 ReactDOM.render(React.createElement(Counter, null), document.getElementById("app"));

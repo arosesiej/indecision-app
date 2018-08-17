@@ -47,7 +47,7 @@ class Counter extends React.Component {
        
         // default state object
         this.state = {
-            count: 0
+            count: props.count
         };
     }
 
@@ -106,4 +106,9 @@ class Counter extends React.Component {
     }
 }
 
+Counter.defaultProps = {
+    count: 0
+};
+
+// could provide a value like "<Counter count={-10}/>"
 ReactDOM.render(<Counter />, document.getElementById("app"));
