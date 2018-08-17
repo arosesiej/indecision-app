@@ -45,7 +45,28 @@ var IndecisionApp = function (_React$Component) {
     _createClass(IndecisionApp, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            console.log('componentDidMount!');
+
+            // in case invalid json / js 
+            try {
+
+                // retrieve item from local storage
+                var json = localStorage.getItem('options');
+                // turn back into JS obj [array]
+                var options = JSON.parse(json);
+
+                // if there are options and not null / new
+                if (options) {
+                    // fetching out of local storage and populating the array
+                    this.setState(function () {
+                        return { options: options };
+                    });
+                }
+
+                console.log('componentDidMount! ~ fetching data');
+            } catch (e) {
+                // do nothing if invalid json data
+                // falls back to empty array if so
+            }
         }
 
         //Lifecycle method
@@ -55,11 +76,21 @@ var IndecisionApp = function (_React$Component) {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps, prevState) {
 
-            console.log('componentDidUpdate!');
+            // if old state object has a diff length than the current one
+            // only then save
+            if (prevState.options.length !== this.state.options.length) {
+                // convert to string
+                var json = JSON.stringify(this.state.options);
+                // save in local storage
+                localStorage.setItem('options', json);
+
+                console.log('componentDidUpdate! ~ saving data');
+            }
         }
 
         //Lifecycle method
         // fires before component goes away
+        // used for app w multiple pages - would trigger when new page possibly
 
     }, {
         key: 'componentWillUnmount',
@@ -207,6 +238,8 @@ var Action = function Action(props) {
 };
 
 var Options = function Options(props) {
+
+    // when options array empty - display
     return React.createElement(
         'div',
         null,
@@ -214,6 +247,11 @@ var Options = function Options(props) {
             'button',
             { onClick: props.handleDeleteOptions },
             'Remove All'
+        ),
+        props.options.length === 0 && React.createElement(
+            'p',
+            null,
+            'Please add an option to begin.'
         ),
         props.options.map(function (option) {
             return React.createElement(Option, {
@@ -281,6 +319,11 @@ var AddOption = function (_React$Component2) {
             this.setState(function () {
                 return { error: error };
             });
+
+            // clear input if there was an error
+            if (!error) {
+                e.target.elements.option.value = '';
+            }
         }
     }, {
         key: 'render',

@@ -26,18 +26,52 @@ class IndecisionApp extends React.Component {
     //Lifecycle method
     // fires when component first mounts to DOM
     componentDidMount() {
-        console.log('componentDidMount!');
+
+        // in case invalid json / js 
+        try {
+
+            // retrieve item from local storage
+            const json = localStorage.getItem('options');
+            // turn back into JS obj [array]
+            const options = JSON.parse(json);
+
+
+            // if there are options and not null / new
+            if (options) {
+                // fetching out of local storage and populating the array
+                this.setState(() => ({ options }));
+            }
+
+            console.log('componentDidMount! ~ fetching data');
+
+        } catch (e) {
+            // do nothing if invalid json data
+            // falls back to empty array if so
+        }
+
+
     }
 
     //Lifecycle method
     // when state or prop values change
     componentDidUpdate(prevProps, prevState) {
 
-        console.log('componentDidUpdate!');
+        // if old state object has a diff length than the current one
+        // only then save
+        if (prevState.options.length !== this.state.options.length) {
+            // convert to string
+            const json = JSON.stringify(this.state.options);
+            // save in local storage
+            localStorage.setItem('options', json);
+
+            console.log('componentDidUpdate! ~ saving data');
+        }
+
     }
 
     //Lifecycle method
     // fires before component goes away
+    // used for app w multiple pages - would trigger when new page possibly
     componentWillUnmount() {
         console.log('componentWillUnmount!')
     }
@@ -92,8 +126,8 @@ class IndecisionApp extends React.Component {
         }
 
 
-        this.setState((prevState) => ({ 
-            options: prevState.options.concat((option)) 
+        this.setState((prevState) => ({
+            options: prevState.options.concat((option))
         }));
 
 
@@ -137,39 +171,44 @@ const Header = (props) => {
     );
 };
 
-Header.defaultProps =  {
-  title: 'Test App',
-  subtitle: 'Subtitle'  
+Header.defaultProps = {
+    title: 'Test App',
+    subtitle: 'Subtitle'
 };
 
 const Action = (props) => {
-    return(
+    return (
         <div>
             <button
                 onClick={props.handlePick}
                 disabled={!props.hasOptions}
             >
                 What should I do?
-            </button>       
+            </button>
         </div>
     );
 };
 
 
 const Options = (props) => {
+
+    // when options array empty - display
     return (
         <div>
-                <button onClick={props.handleDeleteOptions}>Remove All</button>
-                {
-                    props.options.map((option) => (
-                        <Option 
-                            key={option} 
-                            optionText={option} 
-                            handleDeleteOption={props.handleDeleteOption}
-                        />
-                    ))
-                }
-            </div>
+            <button onClick={props.handleDeleteOptions}>Remove All</button>
+            
+            {props.options.length === 0 && <p>Please add an option to begin.</p>}
+
+            {
+                props.options.map((option) => (
+                    <Option
+                        key={option}
+                        optionText={option}
+                        handleDeleteOption={props.handleDeleteOption}
+                    />
+                ))
+            }
+        </div>
     );
 };
 
@@ -178,7 +217,7 @@ const Option = (props) => {
     return (
         <div>
             {props.optionText}
-            <button 
+            <button
                 onClick={(e) => {
                     props.handleDeleteOption(props.optionText);
                 }}
@@ -218,6 +257,10 @@ class AddOption extends React.Component {
         // if user enteres an error - update the state
         this.setState(() => ({ error }));
 
+        // clear input if there was an error
+        if (!error) {
+            e.target.elements.option.value = '';
+        }
     }
 
     render() {
