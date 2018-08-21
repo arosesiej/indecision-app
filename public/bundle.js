@@ -65,53 +65,8 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_js__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__person_js__ = __webpack_require__(2);
-//import './utils.js';
-// grab function from file
-
-
-
-console.log("app.js is running");
-console.log(__WEBPACK_IMPORTED_MODULE_0__utils_js__["b" /* square */](4));
-console.log(__WEBPACK_IMPORTED_MODULE_0__utils_js__["a" /* add */](100,23));
-
-console.log(__WEBPACK_IMPORTED_MODULE_1__person_js__["b" /* isAdult */](18));
-console.log(__WEBPACK_IMPORTED_MODULE_1__person_js__["a" /* canDrink */](18));
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-console.log('utils.js is running');
-
-const square = (x) => x*x;
-/* harmony export (immutable) */ __webpack_exports__["b"] = square;
-
-const add = (a,b) => a+b;
-/* harmony export (immutable) */ __webpack_exports__["a"] = add;
-
-
-//exports - default export - named exports
-// alt syntax - export { square, add }
-// must have variable declaration to export
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-const isAdult = (age) => age >= 18;
-/* harmony export (immutable) */ __webpack_exports__["b"] = isAdult;
-
-const canDrink = (age) => age >= 21;
-/* harmony export (immutable) */ __webpack_exports__["a"] = canDrink;
 
 
 /***/ })
