@@ -1006,7 +1006,7 @@ var _IndecisionApp2 = _interopRequireDefault(_IndecisionApp);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React component are just ES6 classes
-// In React Components - you must define render
+// In React Components - you must define render. 
 
 _reactDom2.default.render(_react2.default.createElement(_IndecisionApp2.default, null), document.getElementById('app')); // install -> import -> use
 // install: using npm or yarn to install

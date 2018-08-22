@@ -13,6 +13,6 @@ import ReactDOM from 'react-dom';
 import IndecisionApp from './components/IndecisionApp.js';
 
 // React component are just ES6 classes
-// In React Components - you must define render
+// In React Components - you must define render. 
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
