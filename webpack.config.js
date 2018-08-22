@@ -25,6 +25,7 @@ module.exports = {
             // don't run babel on these libraries
             exclude: /node_modules/
         }]
-    }
+    },
+    devtool: 'cheap-module-eval-source-map'
 
 };
