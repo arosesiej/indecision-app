@@ -19,7 +19,7 @@ export default class AddOption extends React.Component {
     handleAddOption(e) {
         // prevent default form submission
         e.preventDefault();
-        console.log(testtings);
+        
 
         const option = e.target.elements.option.value.trim();
 
