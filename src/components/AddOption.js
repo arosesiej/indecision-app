@@ -5,18 +5,13 @@ import React from 'react';
  */
 export default class AddOption extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.handleAddOption = this.handleAddOption.bind(this);
+    state = {
+        error: undefined
+    };
 
-        // state of input options - user input
-        this.state = {
-            error: undefined
-        };
-    }
 
     // When form submitted
-    handleAddOption(e) {
+    handleAddOption = (e) => {
         // prevent default form submission
         e.preventDefault();
         

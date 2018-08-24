@@ -12,18 +12,77 @@ import Action from './Action.js';
  * Application that takes user input and randomly chooses one and displays back to the user.
  */
 export default class IndecisionApp extends React.Component {
-    constructor(props) {
-        super(props);
+    state = {
+        options: []
+    };
 
-        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-        this.handlePick = this.handlePick.bind(this);
-        this.handleAddOption = this.handleAddOption.bind(this);
-        this.handleDeleteOption = this.handleDeleteOption.bind(this);
+    // delete all options - clear array
+    handleDeleteOptions = () => {
 
-        this.state = {
-            options: []
+        this.setState(() => ({ options: [] }));
+
+        // same as ^^^ but cleaner and more concise
+        // this.setState(() => {
+        //     return {
+        //         options: []
+        //     };
+        // });
+    };
+
+    // deletes a single option
+    handleDeleteOption = (optionToRemove) => {
+
+        //set to old option value
+        this.setState((prevState) => ({
+            options: prevState.options.filter((option) => {
+                //true if keep item in array - false to remove
+                // see if option = arg thats passed in
+                // if the option we want to remove isnt the same as the current option
+                return optionToRemove !== option;
+            })
+        }));
+    };
+
+
+
+    // pick a random option
+    handlePick = () => {
+        const randomNum = Math.floor(Math.random() * this.state.options.length);
+        const option = this.state.options[randomNum];
+        alert(option);
+
+    };
+
+    // add an option from user input
+    handleAddOption = (option) => {
+
+        // check if empty string
+        if (!option) {
+            return 'Enter valid value to add.';
+
+            // check if value already exists
+        } else if (this.state.options.indexOf(option) > -1) {
+            return 'Value already exists';
         }
-    }
+
+
+        this.setState((prevState) => ({
+            options: prevState.options.concat((option))
+        }));
+
+
+    };
+
+
+
+
+
+
+
+
+
+
+
 
     //Lifecycle method
     // fires when component first mounts to DOM
@@ -78,62 +137,7 @@ export default class IndecisionApp extends React.Component {
         console.log('componentWillUnmount!')
     }
 
-    // delete all options - clear array
-    handleDeleteOptions() {
 
-        this.setState(() => ({ options: [] }));
-
-        // same as ^^^ but cleaner and more concise
-        // this.setState(() => {
-        //     return {
-        //         options: []
-        //     };
-        // });
-    }
-
-    // deletes a single option
-    handleDeleteOption(optionToRemove) {
-
-        //set to old option value
-        this.setState((prevState) => ({
-            options: prevState.options.filter((option) => {
-                //true if keep item in array - false to remove
-                // see if option = arg thats passed in
-                // if the option we want to remove isnt the same as the current option
-                return optionToRemove !== option;
-            })
-        }));
-    }
-
-
-
-    // pick a random option
-    handlePick() {
-        const randomNum = Math.floor(Math.random() * this.state.options.length);
-        const option = this.state.options[randomNum];
-        alert(option);
-
-    }
-
-    // add an option from user input
-    handleAddOption(option) {
-
-        // check if empty string
-        if (!option) {
-            return 'Enter valid value to add.';
-
-            // check if value already exists
-        } else if (this.state.options.indexOf(option) > -1) {
-            return 'Value already exists';
-        }
-
-
-        this.setState((prevState) => ({
-            options: prevState.options.concat((option))
-        }));
-
-
-    }
 
     render() {
 
