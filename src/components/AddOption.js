@@ -28,7 +28,7 @@ export default class AddOption extends React.Component {
         if (!error) {
             e.target.elements.option.value = '';
         }
-    }
+    };
 
     render() {
         return (
@@ -42,8 +42,6 @@ export default class AddOption extends React.Component {
                     <input type="text" name="option" />
                     <button>Add Option</button>
                 </form>
-
-
 
             </div>
         );
