@@ -16,12 +16,12 @@ import IndecisionApp from './components/IndecisionApp.js';
 // In React Components - you must define render. 
 
 const Layout = () => {
-    return {
+    return (
         <div>
             <p>header</p>
             <p>footer</p>
         </div>
-    };
+    );
 }
 
 
