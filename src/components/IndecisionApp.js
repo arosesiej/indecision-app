@@ -3,6 +3,7 @@ import AddOption from './AddOption.js';
 import Options from './Options.js';
 import Header from './Header.js';
 import Action from './Action.js';
+import OptionModal from './OptionModal.js';
 
 // stateless functional component
 // doesn't do much - single funct render - simple
@@ -13,7 +14,8 @@ import Action from './Action.js';
  */
 export default class IndecisionApp extends React.Component {
     state = {
-        options: []
+        options: [],
+        selectedOptionModal: undefined
     };
 
     // delete all options - clear array
@@ -28,6 +30,14 @@ export default class IndecisionApp extends React.Component {
         //     };
         // });
     };
+
+    handleClearSelectedOption = () => {
+        this.setState(() => ({
+            selectedOptionModal: undefined
+        }));
+    }
+
+
 
     // deletes a single option
     handleDeleteOption = (optionToRemove) => {
@@ -49,7 +59,9 @@ export default class IndecisionApp extends React.Component {
     handlePick = () => {
         const randomNum = Math.floor(Math.random() * this.state.options.length);
         const option = this.state.options[randomNum];
-        alert(option);
+        this.setState(() => ({
+            selectedOptionModal: option
+        }));
 
     };
 
@@ -158,6 +170,11 @@ export default class IndecisionApp extends React.Component {
                 />
                 <AddOption
                     handleAddOption={this.handleAddOption}
+                />
+
+                <OptionModal 
+                    selectedOptionModal={this.state.selectedOptionModal}
+                    handleClearSelectedOption={this.handleClearSelectedOption}
                 />
             </div>
         );
