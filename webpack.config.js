@@ -18,13 +18,24 @@ module.exports = {
         // defines how we want to use our loader
         // run babel whenever it sees a JS file except the ones in
         // the node_modules
-        rules: [{
-            loader: 'babel-loader',
-            // what files we want to load this on - js extension
-            test: /\.js$/,
-            // don't run babel on these libraries
-            exclude: /node_modules/
-        }]
+        rules: [
+        
+            {
+                loader: 'babel-loader',
+                // what files we want to load this on - js extension
+                test: /\.js$/,
+                // don't run babel on these libraries
+                exclude: /node_modules/
+            },
+
+            {
+                // look for any file ending w .css
+                test: /\.css$/,
+                // 'use' - an array of loaders
+                use: ['style-loader', 'css-loader']
+            }
+    
+        ]
     },
     devtool: 'cheap-module-eval-source-map',
     devServer: {
