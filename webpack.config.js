@@ -29,10 +29,10 @@ module.exports = {
             },
 
             {
-                // look for any file ending w .css
-                test: /\.css$/,
+                // look for any file ending w .scss
+                test: /\.scss$/,
                 // 'use' - an array of loaders
-                use: ['style-loader', 'css-loader']
+                use: ['style-loader', 'css-loader', 'sass-loader']
             }
     
         ]
