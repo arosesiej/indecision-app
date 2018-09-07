@@ -1,3 +1,6 @@
+@import './base/settings';
 @import './base/base';
+@import './components/container';
 @import './components/header';
+
 // when importing a partial - leave off underscore + extension
