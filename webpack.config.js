@@ -30,7 +30,8 @@ module.exports = {
 
             {
                 // look for any file ending w .scss
-                test: /\.scss$/,
+                // ? - .css or .scss files
+                test: /\.s?css$/,
                 // 'use' - an array of loaders
                 use: ['style-loader', 'css-loader', 'sass-loader']
             }
